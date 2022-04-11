@@ -14,8 +14,11 @@ public class Manager<T> {
             return a;
         }
         else{
-            return b;
+            if ((a == "IN_PROGRESS") || (b == "IN_PROGRESS")){
+                return "IN_PROGRESS";
+            }
         }
+        return null;
     }
 
     public static void ShowAll(){
