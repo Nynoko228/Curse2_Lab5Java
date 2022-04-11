@@ -13,6 +13,9 @@ public class BigTask extends Task {
             if ((a == "IN_PROGRESS") || (b == "IN_PROGRESS")){
                 return "IN_PROGRESS";
             }
+            else if(((a == "NEW")&&(b == "DONE"))||((a == "DONE") && (b == "NEW"))){
+                return "IN_PROGRESS";
+            }
         }
         return null;
     }
