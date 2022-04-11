@@ -8,18 +8,9 @@ public class Manager<T> {
     static ArrayList<Task> LstofTasks = new ArrayList<Task>();
     static ArrayList<Subtask> LstofSub = new ArrayList<Subtask>();
     static ArrayList<BigTask> LstofBig = new ArrayList<BigTask>();
+    int cnt = 0;
 
-    public static String CheckStatus(String a, String b){ //a - BigTask  b - Task/Subtask
-        if (a == b){
-            return a;
-        }
-        else{
-            if ((a == "IN_PROGRESS") || (b == "IN_PROGRESS")){
-                return "IN_PROGRESS";
-            }
-        }
-        return null;
-    }
+
 
     public static void ShowAll(){
         for (int i = 0; i < LstofTasks.size(); i++){
@@ -89,7 +80,7 @@ public class Manager<T> {
         int d = scanner.nextInt();
         LstofSub.add(new Subtask(a, b, c, d));
         for (int i = 0; i < LstofBig.size(); i++){
-            if((LstofBig.get(i).id == d) && (c == LstofBig.get(i).StatusofTask)){
+            /*if((LstofBig.get(i).id == d) && (c == LstofBig.get(i).StatusofTask)){
                 LstofBig.get(i).lst.add(new Subtask(a, b, c, d));
             }
             else{
@@ -101,6 +92,9 @@ public class Manager<T> {
                     LstofBig.get(i).StatusofTask = "NEW";
                     LstofBig.get(i).lst.add(new Subtask(a, b, c, d));
                 }
+            }*/
+            if (LstofBig.get(i).id == d){
+                LstofBig.get(i).StatusofTask = LstofBig.get(i).CheckStatus(LstofBig.get(i).StatusofTask, c);
             }
         }
     }
@@ -133,7 +127,7 @@ public class Manager<T> {
                 System.out.println("Введите id большой задачи: ");
                 int idB = scanner.nextInt();
                 for (int j = 0; j < LstofBig.size(); j++){
-                    if ((LstofBig.get(j).id == idB) &&(LstofTasks.get(i).StatusofTask == LstofBig.get(j).StatusofTask)){
+                    /*if ((LstofBig.get(j).id == idB) &&(LstofTasks.get(i).StatusofTask == LstofBig.get(j).StatusofTask)){
                         LstofBig.get(i).lst.add(new Subtask(LstofTasks.get(i).NameofTask, LstofTasks.get(i).id, LstofTasks.get(i).StatusofTask, idB));
                         LstofTasks.remove(i);
                     }
@@ -145,6 +139,11 @@ public class Manager<T> {
                     else if ((LstofBig.get(j).id == idB) &&(LstofTasks.get(i).StatusofTask == "NEW")){
                         LstofBig.get(j).StatusofTask = "NEW";
                         LstofBig.get(i).lst.add(new Subtask(LstofTasks.get(i).NameofTask, LstofTasks.get(i).id, LstofTasks.get(i).StatusofTask, idB));
+                        LstofTasks.remove(i);
+                    }*/
+                    if (LstofBig.get(j).id == idB){
+                        LstofBig.get(j).StatusofTask = LstofBig.get(j).CheckStatus(LstofBig.get(j).StatusofTask, LstofTasks.get(i).StatusofTask);
+                        LstofBig.get(j).lst.add(new Subtask(LstofTasks.get(i).NameofTask, LstofTasks.get(i).id, LstofTasks.get(i).StatusofTask, idB));
                         LstofTasks.remove(i);
                     }
             }
