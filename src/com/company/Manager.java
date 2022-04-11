@@ -27,27 +27,23 @@ public class Manager<T> {
         LstofTasks.clear();
     }
 
-    public Task getTaskonID(){
+    public void getTaskonID(){
         Scanner scanner = new Scanner(System.in);
         int item = scanner.nextInt();
         for (int i = 0; i < LstofTasks.size(); i++){
             if (LstofTasks.get(i).id == item){
             System.out.println("Название задачи: " + LstofTasks.get(i).NameofTask);
-            return LstofTasks.get(i);
         }}
         for (int i = 0; i < LstofBig.size(); i++) {
             if (LstofBig.get(i).id == item) {
                 System.out.println("Название задачи: " + LstofBig.get(i).NameofTask);
-                return LstofBig.get(i);
             }
         }
         for (int i = 0; i < LstofSub.size(); i++){
             if (LstofSub.get(i).id == item){
                 System.out.println("Название задачи: " + LstofSub.get(i).NameofTask);
-                return LstofSub.get(i);
             }
         }
-        return null;
     }
 
     public void addTask(){
@@ -81,8 +77,18 @@ public class Manager<T> {
         int d = scanner.nextInt();
         LstofSub.add(new Subtask(a, b, c, d));
         for (int i = 0; i < LstofBig.size(); i++){
-            if(LstofBig.get(i).id == d){
+            if((LstofBig.get(i).id == d) && (c == LstofBig.get(i).StatusofTask)){
                 LstofBig.get(i).lst.add(new Subtask(a, b, c, d));
+            }
+            else{
+                if ((c == "IN_PROGRESS") && ((LstofBig.get(i).id == d))){
+                    LstofBig.get(i).StatusofTask = "IN_PROGRESS";
+                    LstofBig.get(i).lst.add(new Subtask(a, b, c, d));
+                }
+                else if ((LstofBig.get(i).id == d) && (c == "NEW")){
+                    LstofBig.get(i).StatusofTask = "NEW";
+                    LstofBig.get(i).lst.add(new Subtask(a, b, c, d));
+                }
             }
         }
     }
@@ -105,5 +111,33 @@ public class Manager<T> {
             }
         }
     }
+
+    public void Remake(){
+        System.out.println("Введите id задачи: ");
+        Scanner scanner = new Scanner(System.in);
+        int id = scanner.nextInt();
+        for (int i = 0; i < LstofTasks.size(); i++){
+            if (LstofTasks.get(i).id == id){
+                System.out.println("Введите id большой задачи: ");
+                int idB = scanner.nextInt();
+                for (int j = 0; j < LstofBig.size(); j++){
+                    if ((LstofBig.get(j).id == idB) &&(LstofTasks.get(i).StatusofTask == LstofBig.get(j).StatusofTask)){
+                        LstofBig.get(i).lst.add(new Subtask(LstofTasks.get(i).NameofTask, LstofTasks.get(i).id, LstofTasks.get(i).StatusofTask, idB));
+                        LstofTasks.remove(i);
+                    }
+                    else if((LstofBig.get(j).id == idB) &&(LstofTasks.get(i).StatusofTask == "IN_PROGRESS")){
+                        LstofBig.get(j).StatusofTask = "IN_PROGRESS";
+                        LstofBig.get(i).lst.add(new Subtask(LstofTasks.get(i).NameofTask, LstofTasks.get(i).id, LstofTasks.get(i).StatusofTask, idB));
+                        LstofTasks.remove(i);
+                    }
+                    else if ((LstofBig.get(j).id == idB) &&(LstofTasks.get(i).StatusofTask == "NEW")){
+                        LstofBig.get(j).StatusofTask = "NEW";
+                        LstofBig.get(i).lst.add(new Subtask(LstofTasks.get(i).NameofTask, LstofTasks.get(i).id, LstofTasks.get(i).StatusofTask, idB));
+                        LstofTasks.remove(i);
+                    }
+            }
+        }
+    }
+}
 
 }
