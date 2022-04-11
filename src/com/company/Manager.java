@@ -9,6 +9,15 @@ public class Manager<T> {
     static ArrayList<Subtask> LstofSub = new ArrayList<Subtask>();
     static ArrayList<BigTask> LstofBig = new ArrayList<BigTask>();
 
+    public static String CheckStatus(String a, String b){ //a - BigTask  b - Task/Subtask
+        if (a == b){
+            return a;
+        }
+        else{
+            return b;
+        }
+    }
+
     public static void ShowAll(){
         for (int i = 0; i < LstofTasks.size(); i++){
             System.out.println("Название задачи и id: " + LstofTasks.get(i).NameofTask + " " + LstofTasks.get(i).id);
