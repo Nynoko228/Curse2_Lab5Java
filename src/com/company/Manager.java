@@ -74,6 +74,7 @@ public class Manager {
             ArrayList<Subtask> lst = new ArrayList<>();
             System.out.println("Введите количество подзадач: ");
             int cnt = scanner.nextInt();
+            scanner.nextLine();
             for (int i = 0; i < cnt; i++) {
                 System.out.println("Введите название задачи, её id и статус: ");
                 String d = scanner.nextLine();
@@ -81,6 +82,7 @@ public class Manager {
                 if (!LstID.contains(e)) {
                     LstID.add(e);
                     scanner.nextLine();
+                    System.out.println("Введите название S задачи, её id и статус: ");
                     String f = scanner.nextLine();
                     lst.add(new Subtask(d, e, f, b));
                 }
@@ -101,7 +103,6 @@ public class Manager {
             LstID.add(b);
             scanner.nextLine();
             String c = scanner.nextLine();
-            scanner.nextLine();
             int d = scanner.nextInt();
             LstofSub.add(new Subtask(a, b, c, d));
             for (int i = 0; i < LstofBig.size(); i++) {
