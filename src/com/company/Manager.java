@@ -36,16 +36,16 @@ public class Manager {
         int item = scanner.nextInt();
         for (int i = 0; i < LstofTasks.size(); i++){
             if (LstofTasks.get(i).id == item){
-            System.out.println("Название задачи: " + LstofTasks.get(i).NameofTask);
+            System.out.println("Название задачи: " + LstofTasks.get(i).NameofTask + " id: " + LstofTasks.get(i).id + " статус задачи: " + LstofTasks.get(i).StatusofTask);
         }}
         for (int i = 0; i < LstofBig.size(); i++) {
             if (LstofBig.get(i).id == item) {
-                System.out.println("Название задачи: " + LstofBig.get(i).NameofTask);
+                System.out.println("Название задачи: " + LstofBig.get(i).NameofTask + " id: " + LstofBig.get(i).id + " статус задачи: " + LstofBig.get(i).StatusofTask);
             }
         }
         for (int i = 0; i < LstofSub.size(); i++){
             if (LstofSub.get(i).id == item){
-                System.out.println("Название задачи: " + LstofSub.get(i).NameofTask);
+                System.out.println("Название задачи: " + LstofSub.get(i).NameofTask + " id: " + LstofSub.get(i).id + " статус задачи: " + LstofSub.get(i).StatusofTask);
             }
         }
     }
