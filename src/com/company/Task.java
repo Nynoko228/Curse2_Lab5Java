@@ -10,5 +10,12 @@ public class Task {
         id = b;
         StatusofTask = c;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        return false;
+    }
 
 }

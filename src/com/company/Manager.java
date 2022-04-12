@@ -15,13 +15,13 @@ public class Manager {
 
     public static void ShowAll(){
         for (int i = 0; i < LstofTasks.size(); i++){
-            System.out.println("Название задачи и id: " + LstofTasks.get(i).NameofTask + " " + LstofTasks.get(i).id);
+            System.out.println("Название задачи: " + LstofTasks.get(i).NameofTask + " id: " + LstofTasks.get(i).id + " статус задачи: " + LstofTasks.get(i).StatusofTask);
         }
         for (int i = 0; i < LstofBig.size(); i++){
-            System.out.println("Название большой задачи и id: " + LstofBig.get(i).NameofTask + " " + LstofBig.get(i).id);
+            System.out.println("Название задачи: " + LstofBig.get(i).NameofTask + " id: " + LstofBig.get(i).id + " статус задачи: " + LstofBig.get(i).StatusofTask);
         }
         for (int i = 0; i < LstofSub.size(); i++){
-            System.out.println("Название задачи и id: " + LstofSub.get(i).NameofTask + " " + LstofSub.get(i).id);
+            System.out.println("Название задачи: " + LstofSub.get(i).NameofTask + " id: " + LstofSub.get(i).id + " статус задачи: " + LstofSub.get(i).StatusofTask);
         }
     }
 
@@ -33,6 +33,7 @@ public class Manager {
 
     public void getTaskonID(){
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите id искомой задачи: ");
         int item = scanner.nextInt();
         for (int i = 0; i < LstofTasks.size(); i++){
             if (LstofTasks.get(i).id == item){
@@ -76,20 +77,20 @@ public class Manager {
             int cnt = scanner.nextInt();
             scanner.nextLine();
             for (int i = 0; i < cnt; i++) {
-                System.out.println("Введите название задачи, её id и статус: ");
+                System.out.println("Введите название S задачи, её id и статус: ");
                 String d = scanner.nextLine();
                 int e = scanner.nextInt();
                 if (!LstID.contains(e)) {
                     LstID.add(e);
                     scanner.nextLine();
-                    System.out.println("Введите название S задачи, её id и статус: ");
                     String f = scanner.nextLine();
+                    LstofSub.add(new Subtask(d, e, f, b));
                     lst.add(new Subtask(d, e, f, b));
                 }
             }
             BigTask bgt = new BigTask(a, b, c, lst);
             for (int i = 0; i < lst.size(); i++) {
-                bgt.StatusofTask = bgt.CheckStatus(lst.get(i).StatusofTask, bgt.StatusofTask);
+                bgt.StatusofTask = bgt.CheckStatus(bgt.StatusofTask, lst.get(i).StatusofTask);
             }
             LstofBig.add(bgt);
         }
@@ -134,19 +135,24 @@ public class Manager {
             if (LstofTasks.get(i).id == item){
                 LstID.remove(item);
                 LstofTasks.remove(i);
+                break;
             }}
         for (int i = 0; i < LstofBig.size(); i++) {
             if (LstofBig.get(i).id == item) {
                 for (int j = 0; j < LstofBig.get(i).lst.size(); j++){
-                     for(int l = 0; l < LstofSub.size(); l++){
-                         if(LstofBig.get(i).lst.get(j).idBig == LstofSub.get(l).idBig){
-                             LstID.remove(LstofSub.get(l).id);
-                             LstofSub.remove(l);
-                         }
-                     }
+//                     for(int l = 0; l < LstofSub.size(); l++){
+//                         if(LstofBig.get(i).lst.get(j).idBig == LstofSub.get(l).idBig){
+                    LstID.remove(LstofSub.get(j).id);
+                    System.out.println(LstofBig.get(i).lst.size());
+                    LstofBig.get(i).lst.remove(LstofSub.get(j));
+                    System.out.println(LstofBig.get(i).lst.size());
+                    LstofSub.remove(j);
+//                         }
+//                     }
                 }
                 LstID.remove(item);
                 LstofBig.remove(i);
+                break;
             }
         }
         for (int i = 0; i < LstofSub.size(); i++){
@@ -154,10 +160,15 @@ public class Manager {
                 for (int j = 0; j <LstofBig.size(); j++){
                     if((LstofBig.get(j).id == LstofSub.get(i).idBig) && (LstofBig.get(j).lst.size() == 1)){
                         LstofBig.remove(j);
+                        break;
+                    }
+                    else if((LstofBig.get(j).id == LstofSub.get(i).idBig)){
+                        LstofBig.get(j).lst.remove(LstofSub.get(i));
                     }
                 }
                 LstID.remove(item);
                 LstofSub.remove(i);
+                break;
             }
         }
     }

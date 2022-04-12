@@ -8,4 +8,11 @@ public class Subtask extends Task {
         super(a, b, c);
         idBig = d;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        return false;
+    }
 }

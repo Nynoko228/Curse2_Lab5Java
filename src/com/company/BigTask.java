@@ -6,14 +6,14 @@ public class BigTask extends Task {
     ArrayList<Subtask> lst = new ArrayList<>();
 
     public static String CheckStatus(String a, String b){ //a - BigTask  b - Task/Subtask
-        if (a == b){
+        if (a.equals(b)){
             return a;
         }
         else{
-            if ((a == "IN_PROGRESS") || (b == "IN_PROGRESS")){
+            if ((a.equals("IN_PROGRESS")) || (b.equals("IN_PROGRESS"))){
                 return "IN_PROGRESS";
             }
-            else if(((a == "NEW")&&(b == "DONE"))||((a == "DONE") && (b == "NEW"))){
+            else if(((a.equals("NEW"))&&(b.equals("DONE")))||((a.equals("DONE")) && (b.equals("NEW")))){
                 return "IN_PROGRESS";
             }
         }
@@ -23,5 +23,12 @@ public class BigTask extends Task {
     public BigTask(String a, int b, String c, ArrayList<Subtask> list) {
         super(a, b, c);
         lst = list;
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        return false;
     }
 }
